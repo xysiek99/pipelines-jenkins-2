@@ -42,7 +42,7 @@ pipeline {
 
         stage("Configure backend.tf file") {
             steps {
-                sh "./configTfstateLocation.sh -backend_file_location=${env.BACKEND_LOCATION} -tfstate_file_loaction=${env.TFSTATE_DIR}"
+                sh "./configTfstateLocation.sh -backend_file_location=${env.BACKEND_LOCATION} -tfstate_file_loaction='../${env.TFSTATE_DIR}'"
             }
         }
     }
