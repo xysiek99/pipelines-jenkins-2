@@ -6,11 +6,11 @@ pipeline {
     }
 
     stages {
-        stage("Clean workspace") {
-            steps {
-                deleteDir()
-            }
-        }
+        // stage("Clean workspace") {
+        //     steps {
+        //         deleteDir()
+        //     }
+        // }
 
         stage("Checkout Github repo") {
             steps {
@@ -30,6 +30,7 @@ pipeline {
                 script {
                     env.TFSTATE_DIR = "environments-terraform/${params.ENVIRONMENT}"
                     env.BACKEND_LOCATION = "setup-terraform/backend.tf"
+                    env.TFSTATE_LOCATION = "../${env.TFSTATE_DIR}/terraform.tfstate"
                 }
             }
         }        
@@ -42,7 +43,7 @@ pipeline {
 
         stage("Configure backend.tf file") {
             steps {
-                sh "./configTfstateLocation.sh -backend_file_location=${env.BACKEND_LOCATION} -tfstate_file_loaction='../${env.TFSTATE_DIR}'"
+                sh "./configTfstateLocation.sh -backend_file_location=${env.BACKEND_LOCATION} -tfstate_file_loaction='${env.TFSTATE_LOCATION}'"
             }
         }
     }
