@@ -6,11 +6,11 @@ pipeline {
     }
 
     stages {
-        // stage("Clean workspace") {
-        //     steps {
-        //         deleteDir()
-        //     }
-        // }
+        stage("Clean workspace") {
+            steps {
+                deleteDir()
+            }
+        }
 
         stage("Checkout Github repo") {
             steps {
